@@ -85,16 +85,16 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     public void insere(Aluno aluno) {
         SQLiteDatabase db = getWritableDatabase();
-
+        aluno.setId(geraUUID());//inserindo UUID para novos alunos cadastrados
         ContentValues dados = pegaDadosDoAluno(aluno);
 
        db.insert("Alunos", null, dados);
-        //aluno.setId(id);
     }
 
     @NonNull
     private ContentValues pegaDadosDoAluno(Aluno aluno) {
         ContentValues dados = new ContentValues();
+        dados.put("id", aluno.getId());
         dados.put("nome", aluno.getNome());
         dados.put("endereco", aluno.getEndereco());
         dados.put("telefone", aluno.getTelefone());
