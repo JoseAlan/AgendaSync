@@ -60,6 +60,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(listaAlunos);
+        buscaAlunos();
     }
 
     private void carregaLista() {
@@ -80,6 +81,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        carregaLista();
+    }
+
+    private void buscaAlunos() {
         Call<AlunoSync> call = new RetrofitInicializador().getAlunoServece().lista();
 
         call.enqueue(new Callback<AlunoSync>() {
@@ -97,8 +102,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Log.e("onFailure chamado", t.getMessage());
             }
         });
-
-        carregaLista();
     }
 
     @Override
